@@ -1,0 +1,16 @@
+title: My Website
+description: A simple website with weather widget
+baseurl: ""
+url: ""
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+
+# Exclude from processing
+exclude:
+  - .git/
+  - .github/
+  - README.md
