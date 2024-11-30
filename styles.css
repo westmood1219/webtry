@@ -15,6 +15,7 @@ header {
     color: white;
     padding: 1rem;
     text-align: center;
+    position: relative;  /* 添加相对定位 */
 }
 
 nav ul {
@@ -34,6 +35,41 @@ nav ul li a {
 
 nav ul li a:hover {
     text-decoration: underline;
+}
+
+.weather-widget {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: white;
+    text-align: left;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;  /* 确保天气组件在最上层 */
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+#temperature {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#weather-description {
+    font-size: 0.9rem;
+}
+
+#location {
+    font-size: 0.8rem;
+    opacity: 0.9;
 }
 
 main {
@@ -58,40 +94,6 @@ button {
 
 button:hover {
     background-color: #45a049;
-}
-
-.weather-widget {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    color: white;
-    text-align: left;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.weather-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.2rem;
-}
-
-#temperature {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-#weather-description {
-    font-size: 0.9rem;
-}
-
-#location {
-    font-size: 0.8rem;
-    opacity: 0.9;
 }
 
 footer {
