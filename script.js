@@ -36,7 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
         async getWeather() {
             try {
                 const response = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?q=Pingshan,Shenzhen,CN&appid=${this.apiKey}&units=metric&lang=zh_cn`
+                    `https://api.openweathermap.org/data/2.5/weather?q=Pingshan,Shenzhen,CN&appid=${this.apiKey}&units=metric&lang=zh_cn`,
+                    {
+                        mode: 'cors',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    }
                 );
                 
                 if (!response.ok) {
