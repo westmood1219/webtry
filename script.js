@@ -32,40 +32,37 @@ document.addEventListener('DOMContentLoaded', function() {
         descriptionElement: document.getElementById('weather-description'),
         locationElement: document.getElementById('location'),
 
-        // 获取位置
-        getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    position => this.getWeather(position.coords.latitude, position.coords.longitude),
-                    error => {
-                        console.error('Error getting location:', error);
-                        this.locationElement.textContent = '无法获取位置';
-                    }
-                );
-            } else {
-                this.locationElement.textContent = '浏览器不支持地理定位';
-            }
-        },
-
-        // 获取天气数据
-        async getWeather(lat, lon) {
+        // 获取深圳坪山的天气
+        async getWeather() {
             try {
                 const response = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${this.apiKey}&units=metric&lang=zh_cn`
+                    `https://api.openweathermap.org/data/2.5/weather?q=Pingshan,Shenzhen,CN&appid=${this.apiKey}&units=metric&lang=zh_cn`
                 );
+                
+                if (!response.ok) {
+                    throw new Error('Weather data fetch failed');
+                }
+                
                 const data = await response.json();
                 
                 this.temperatureElement.textContent = `${Math.round(data.main.temp)}°C`;
                 this.descriptionElement.textContent = data.weather[0].description;
-                this.locationElement.textContent = data.name;
+                this.locationElement.textContent = '深圳市坪山区';
+                
+                // 每30分钟更新一次天气
+                setTimeout(() => this.getWeather(), 30 * 60 * 1000);
             } catch (error) {
                 console.error('Error fetching weather:', error);
                 this.temperatureElement.textContent = '--°C';
                 this.descriptionElement.textContent = '获取天气失败';
+                this.locationElement.textContent = '深圳市坪山区';
+                
+                // 如果失败，1分钟后重试
+                setTimeout(() => this.getWeather(), 60 * 1000);
             }
         }
     };
 
     // 初始化天气小部件
-    weatherWidget.getLocation();
+    weatherWidget.getWeather();
 });
